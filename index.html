@@ -1,81 +1,82 @@
 <!DOCTYPE html> 
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Validacion de usuarios</title>
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-</head>
+<meta charset="utf-8">
+<title>Aplic. Web de jQuery Mobile</title>
+<link href="jquery-mobile/jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-mobile/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.0.min.js" type="text/javascript"></script>
+<script src="api/eventos.js" type="text/javascript"></script>
 
+</head> 
 <body> 
 
-<div data-role="page" id="inicio">
-
+<div data-role="page" id="page">
 	<div data-role="header">
-		<h1>Autenticacion de Usuario</h1>
+		<h1>Página uno</h1>
 	</div>
-    
 	<div data-role="content">	
-		<form id="formulario" >
-      
-      			<label> Usuario </label>
-      			<input type="text" id="nombredeusuario" name="nombredeusuario">
-      
-      			<label> Password </label>
-     			<input type="password" id="clave" name="clave" >
-
-      			<input type="submit" value="Login" id="botonLogin">
-      
-    		</form>		
+		<ul data-role="listview" data-inset="true">
+			<li><a href="#page2">Página dos</a></li>
+            <li><a href="#page3">Página tres</a></li>
+			<li><a href="#priv">Privacidad</a></li>
+            <li><a href="#login">Registro</a></li>
+		</ul>		
 	</div>
-	 
-</div>
- 
-<div data-role="page" id="home">
-
-	<div data-role="header">
-		<h1>Bienvenido</h1>
+	<div data-role="footer">
+		<h4>Pie de página</h4>
 	</div>
-
-	<div data-role="content">	
-		<h2> Bienvenido a la aplicacion </h2>
-		<h3> Su usuario y password son válidos</h3>
-	</div>
-
 </div>
 
-<script>
+<div data-role="page" id="page2">
+	<div data-role="header">
+		<h1>Página dos</h1>
+	</div>
+	<div data-role="content">	
+		Contenido		
+	</div>
+	<div data-role="footer">
+		<h4>Pie de página</h4>
+	</div>
+</div>
 
-$('#formulario').submit(function() { 
-	
-	 
-	// recolecta los valores que inserto el usuario
-	var datosUsuario = $("#nombredeusuario").val()
-	var datosPassword = $("#clave").val()
-	
-  	archivoValidacion ="http://aplicacion.netai.net/index.php?jsoncallback=?"
+<div data-role="page" id="page3">
+	<div data-role="header">
+		<h1>Página tres</h1>
+	</div>
+	<div data-role="content">	
+		Contenido		
+	</div>
+	<div data-role="footer">
+		<h4>Pie de página</h4>
+	</div>
+</div>
 
-	$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
-	.done(function(respuestaServer) {
-		
-		alert(respuestaServer.mensaje + "\nGenerado en: " + respuestaServer.hora + "\n" +respuestaServer.generador)
-		
-		if(respuestaServer.validacion == "ok"){
-		  
-		 	/// si la validacion es correcta, muestra la pantalla "home"
-			$.mobile.changePage("#home")
-		  
-		}else{
-		  
-		  /// ejecutar una conducta cuando la validacion falla
-		}
-  
-	})
-	return false;
-})
-	
-</script>
+<div data-role="page" id="login">
+	<div data-role="header">
+		<h1>Registro</h1>
+	</div>
+	<div data-role="content">	
+    <ul data-role="listview" data-inset="true" data-dividertheme="a">
+    <li data-role="list-divider">Datos Usuario </li>
+    <li><input type="text" id="regNom" placeholder="Nombre"/></li>
+    <li><input type="email" id="regEmail" placeholder="Correo Eléctronico" /></li>
+    <li><input type="tel" id="regTel" placeholder="Teléfono" /></li>
+    <li><a href="#" id="regFoto">Tomar Foto</a></li>
+    </ul>
+    <a href="#" data-role="button" id="regEnviar" data-theme="a">Registrar</a>
 
+	</div>
+	
+</div>
+<div data-role="page" id="priv">
+	<div data-role="header">
+		<h1>Privacidad</h1>
+        <a data-role="button" data-rel="back" data-direction="reverse">Atrás</a>	
+	</div>
+	<div data-role="content" style="text-align:justify;">	
+		Contenido		
+	</div>
+</div>
 </body>
 </html>
